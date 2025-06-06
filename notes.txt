@@ -1,0 +1,8 @@
+<!--{% for foodname,foodweight in zip(foodnames,foodweights) %}
+                    <h5>{{ foodname }} - {{ foodweight }}lbs (pounds) </h5>
+                (% endfor %)-->
+
+
+{% for foodname in donations %}
+                    <h5>{{ foodname }} -  lbs (pounds) </h5>
+                (% endfor %)

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/assets/favicon.png" type="image/x-icon">
+    <title>Donate</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class = "main_section">
+        <div class="content">
+            <h1 id="titleDonate">    DONATE    </h1>
+            <br>
+            <form action="" id="donate-form">
+                <h3>Business Information</h3>
+                <br>
+                <!--Business Name Input-->
+                <div class = "input-form">
+                    <label for="b-full-name">Business Full Name</label>
+                    <input type="text" name="b-full-name" class="form-control" id="b-full-name" placeholder="Grocery Store">
+                </div>
+                <br>
+                <!--Business Email Input-->
+                <div class = "input-form">
+                    <label for="b-email"> Business Email</label>
+                    <input type="b-email" name="b-email" class="form-control" id = "b-email" placeholder="grocerystore@yahoo.com">
+                </div>
+                <br>
+                <!--Business Location-->
+                <div class = "input-form">
+                    <label for="b-address">Business Current Location *INCLUDE STATE, CITY, AND ZIP*</label>
+                    <input type="text" name="b-address" class="form-control" id = "b-address" placeholder="123 Lorem. Ave.">
+                <br>
+                <br>
+                <br>
+                <h3>Donation Information</h3>
+                <br>
+                <!--Donation List Input-->
+                <div class = "input-form">
+                    <label for="donatelist-input">Donation List</label>
+                    <!--<textarea name="donatelist-input" class="form-control" id = "donatelist-input" placeholder="10lbs " rows= "4" cols="10">
+                    </textarea>-->
+                    <p>weight(lbs) Item Name</p>
+                    <ul class="donation-list" id="List">
+                        <div class="list-item" id="list-item">
+                            <input type="text" name="list-item" class="form-control food-name" id = "item" placeholder="Apples">
+                            <input type="text" name="list-item" class="form-control food-weight" id = "weight" placeholder="50lbs">
+                        </div>
+                    </ul>
+                    <button type="button" class="btn btn-light" id="add-row">Add Row</button>
+                    <button type="button" class="btn btn-light" id="delete-row">Delete Row</button>
+                </div>
+                <br>
+                <br>
+                <!--Donation Image Input-->
+                <div class = "input-form">
+                    <label for="donation-image">Donation Image</label>
+                    <input type="file" name="donation-image" class="form-control" id = "donation-image" accept="image/*">
+                </div>
+
+                <!--Confirmation message-->
+                <div id = "confirmation"></div>
+                <br>
+                <!--Allergies Input-->
+                <div class = "input-form">
+                    <label for=allergies-text">Allergies *INPUT ALL ALLERGIES KNOWN*</label>
+                    <input type="text" name="allergies-text" class="form-control" id = "alle-rgies" placeholder="*Common Food Allergies* Eggs, Milk, Peanuts, Shellfish, Seasame, Soy, Fruits and Vegetables, and Tree Nuts, and Wheat ">
+                </div>
+                
+            </form>
+            
+            <div id = "confirmation_done"></div>
+            
+            <!--Drop-Off and Send-->
+            <div class="send_back">
+                <button type="button" class="btn btn-outline-warning button" id="back-donate">Back</button>
+                <button type="button" class="btn btn-outline-success button" id="send">Send</button>
+                
+                
+
+            </div>
+            <footer>
+                &copy; 2024 @mealshare
+            </footer>
+        </div>
+
+    </div>
+    <script type="text/javascript" src = "../static/donate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

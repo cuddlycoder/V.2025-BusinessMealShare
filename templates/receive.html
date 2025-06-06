@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receive</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+</head>
+<body>
+   <div class = "main_section">
+    <div class="contentr">
+        <h1>RECEIVE</h1>
+        <br>
+        <h3>Donation Options</h3>
+        <h4 class="label">Choose what donation you will accept</h4>
+        <br>
+        <div id="meal-container">
+    
+            <!--Loop through  every donated meal and display it-->
+            {% for meal in meals %}
+            <div class = "meal" onclick="highlight_meal(this)"> 
+                <img class="datar" src = "../static/images/{{meal[3]}}" alt = "Image" id = "mealimage">
+                <h3 class="datar"> {{  meal[0] }}</h3>
+                <h4 class="datar">{{  meal[1] }}</h4>
+                <h5 class="datar">{{  meal[2] }}</h5>
+                {% for foodname, foodweight in zip(meal[4],meal[5]) %}
+                    <h5 class="datar">{{foodname}} - {{foodweight}}lbs (pounds) </h5>
+                {% endfor %}
+                <h6 class="datar">Allergies - {{ meal[6] }}</h6>
+                <span hidden>{{meal[7]}}</span>
+                <div id="deliveryemail" data-var="{{ meal[1] }}"></div>
+                <div id="food" data-var="{{ meal[4] }}"></div>
+                <div id="lbs" data-var="{{ meal[5] }}"></div>
+
+
+
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        <h3>Non-Profit Organization Information</h2>
+        <br>
+        <form action="" id="donate-form">
+            <!--Name Input-->
+            <div class = "input-form">
+                <label for="org-name">Non-Profit Organization Name</label>
+                <input type="text" name="org-name" class="form-control" id="org-name" placeholder="MealShare">
+            </div>
+            <br>
+            <br>
+            <h3>Contact</h3>
+            <br>
+             <!--Representative Name Input-->
+             <div class = "input-form">
+                <label for="rep-org-name">Representative of Organization Name</label>
+                <input type="text" name="rep-org-name" class="form-control" id="rep-org-name" placeholder="Jamie Mallard">
+            </div>
+            <br>
+            <!--Email Input-->
+            <div class = "input-form">
+                <label for="org-email">Organization Email</label>
+                <input type="email" name="org-email" class="form-control" id = "org-email" placeholder="mealshare@gmail.com">
+            </div>
+            <br>
+            <br>
+            <h3>Location</h3>
+            <br>
+            <!--Address Input-->
+            <div class = "input-form">
+                <label for="org-address"> Non-Profit Organization Address </label>
+                <input type="text" name= "org-address" class="form-control" id = "org-address" placeholder="123 Street Name">
+            </div>
+            <br>
+            <!--City Input-->
+            <div class = "input-form">
+                <label for="city-input">City</label>
+                <input type="text" name="city-input" class="form-control" id = "city" placeholder="City-ville">
+            </div>
+    
+            <br>
+            <!--State Input-->
+            <div class = "input-form">
+                <label for="state-input">State</label>
+                <input type="text" name="state-input" class="form-control" id = "state" placeholder="State-ville">
+            </div>
+            <br>
+            <!--Zip Code Input-->
+            <div class = "input-form">
+                <label for= "zip-input"> Zip Code </label>
+                <input type="text" name="zip-input" class="form-control" id = "zipcode" placeholder="12345">
+            </div>
+            <br>
+    
+            <div id = "confirm_receive">
+    
+            </div>
+              
+              <!--Done-->
+              <div class="dropoff_send">
+                <button type="button" class="btn btn-outline-warning button" id="back-recieve">Back</button>
+                <button type="button" class="btn btn-outline-success button" id="send">Done</button>
+             </div>
+             
+             <footer>
+                &copy; 2024 @mealshare
+             </footer>
+            
+        </form>
+    
+    </div>
+   </div>
+   <script type="text/javascript" src = "../static/receive.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+   <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "U0zlwRKCgaJPFE8jx",
+        });
+    })();
+    async function SendEmail(recipienteEmail, subject, message){
+        try{
+            const emailtemplate = {
+                email_to: recipienteEmail, 
+                subject: subject,
+                message: message
+            }
+            const response = await emailjs.send(
+                "service_dt8e12w",
+                "template_wfj4qy5",
+                emailtemplate
+            )
+            if (response.status == 200){
+                console.log("Email sent. You will receive it shortly")
+                return true
+            }
+        }
+        catch(error){
+            console.error("Email couldn't be sent", error)
+            throw error 
+        }
+    }
+    async function Send(){
+        let receiveremail = document.getElementById("org-email").value
+        let orgname = document.getElementById("org-name").value
+        let orgrep = document.getElementById("rep-org-name").value
+        let address1 = document.getElementById("org-address").value
+        let address2 = document.getElementById("city").value
+        let address3 = document.getElementById("state").value
+        let address4 = document.getElementById("zipcode").value
+        let deliveryemail = document.getElementById("deliveryemail").dataset.var
+        let food = document.getElementById("food").dataset.var
+        let foodlbs = document.getElementById("lbs").dataset.var
+        const receiveemail = await SendEmail(receiveremail, "Delivery Confirmation", "Thank you for choosing MealShare! The donation that you chose will be delivered to you soon!")
+        console.log(receiveemail)
+        const deliveremail = await SendEmail(deliveryemail, "Donation Accepted", "Thank you for choosing MealShare! Your donation of "+ food+foodlbs +" has been accepted by "+ orgname +". You need to deliver it to "+ address1+ " "+address2+" "+address3+" "+address4 +". Please contact "+ orgrep +" at "+ receiveremail +" for more information!")
+        console.log(deliveremail)
+    }
+document.getElementById("send").addEventListener("click", Send)
+    </script>
+</body>
+</html>

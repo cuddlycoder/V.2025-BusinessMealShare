@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Share</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="icon" href="../static/assets/favicon2.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="menu">
+        <h4>MEAL SHARE</h4>
+        <a href="http://127.0.0.1:8000/views/donate">DONATE</a>
+        <a href="http://127.0.0.1:8000/views/receive">RECEIVE</a>
+        <h4 id="info">INFO</h4>
+        <div id="infodropdown">
+            <a href="">WHAT IS MEAL SHARE?</a>
+            <a href="">HHH</a>
+        </div>
+    </div>
+    <div class = "main_section">
+        <div class="content">
+            <img id="logo" src="../static/assets/logo.png" alt="Meal Share">
+            <br>
+            <br>
+        <!--Title-->
+        <h1>We Are Ending Hunger In Our Community</h1>
+        <br>
+        <h2>World Hunger Statistics</h2>
+        <br>
+        <!--Description-->
+        <div class="stats">
+            <div id="stat1" class="info">
+                <p class="statp">The world produces enough food to feed all 8 billion people, yet 733 million people (1 in 11) go hungry every day. - <a href="https://concernusa.org/news/world-hunger-facts/" target="_blank" class="statp">ConcernUsa World Hunger Facts</a></p>
+                <img id="img1" class="Statistic" src="../static/assets/Stat1.png" alt="Graphic showing world hunger statistic with text '733 million people go hungry every day'">
+                <p class="statp">2.8 billion people around the world cannot afford a healthy diet — 35% of the global population. - <a href="https://concernusa.org/news/world-hunger-facts/" target="_blank" class="statp">ConcernUsa World Hunger Facts</a> </p>
+            </div>
+            
+            <div id="stat2" class="info">
+                <p class="statp" >Number of People in Food Insecurity in Hunger Hotspots</p>
+                <img id="img2" class="Statistic" src="../static/assets/Stat2(2).png" alt="Infographic showing global food insecurity data">
+                <p class="statp" >- <a href="https://www.wfp.org/publications/hunger-hotspots-fao-wfp-early-warnings-acute-food-insecurity-november-2024-may-2025" target="_blank" class="statp">Hunger Hotspots: FAO-WFP early warnings on acute food insecurity, November 2024 to May 2025 Outlook</a></p>
+            </div>
+        </div>
+        <br>
+        <h3>OUR GOAL</h2>
+        
+        <p>MealShare is a website that helps businesses work together to fight hunger. It connects companies that want to help provide food with businesses like grocery stores. By working together, they can make a big difference. MealShare’s goal is to bring these two groups together to help reduce hunger.</p>
+        <br>
+        <h3>HOW IT WORKS</h2>
+        
+        <p>The Donate button is for organizations that distribute food to society for a price and may have leftovers. Examples include grocery stores. They will fill out a form and contact the receiver. The Receive button is for non-profit organizations that distribute food to the needy. They can choose what they would like to receive and which grocery store. Accordingly, the grocery stores will give the food to the organizations which will then be distributed to the needy.</p>
+
+        <!--Donate and Deliver and Recieve-->
+        <div class = "donatedeliver">
+            <button id = "donate-btn" class="Dbtn">DONATE</button>
+            <button id = "receive-btn" class = "Dbtn">RECEIVE</button>
+        </div>
+        
+               
+        <!--Sign Up and Sign In-->
+        <!--<div class = "signin_signup"> 
+            <button id = "signin-btn" class = "Sbtn">SIGN IN</button>
+            <button id = "signup-btn" class = "Sbtn">SIGN UP</button>
+
+        </div>-->
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static',filename = 'script.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
