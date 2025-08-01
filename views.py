@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template,request
-import json, sqlite3
+import json, sqlite3, ast
+
 views = Blueprint(__name__, "views")
 
 foods = []
@@ -16,6 +17,33 @@ def insert_donation(name, email, location, imagename, dcontent, dweight, allergi
     connection.commit()
     connection.close()
 
+def pull_donations():
+    connection = sqlite3.connect("BusinessMealShareDatabase.db")
+    cursor = connection.cursor()
+    cursor.execute('''SELECT BusinessName, BusinessEmail, BusinessLocation, ItemsName, ItemsWeight, ItemsImage, Allergies FROM Donator''')
+    donations = cursor.fetchall() 
+    
+    connection.close()
+    formatteddonations = []
+    print(donations)
+    for item in donations:
+        item = list (item) #convert donation data from tupple to a list
+        #fix donated foods names data
+        donatedfoods = item[3]
+        donatedfoods = ast.literal_eval(donatedfoods) # convert string of donated foods into a list
+        item[3] = donatedfoods
+        
+
+        #fix pounds data 
+        foodsweight = item[4]
+        foodsweight = ast.literal_eval(foodsweight)
+        item[4] = foodsweight
+        
+        formatteddonations.append(item)
+
+    print (formatteddonations)
+    return formatteddonations
+
 
 #Insert recievers in database
 def insert_recievers(orgname, orgrep, email, location, contentid):
@@ -30,6 +58,8 @@ def insert_recievers(orgname, orgrep, email, location, contentid):
     connection.close()
 
 
+
+
 #Renders each page
 @views.route("/")
 def home():
@@ -38,6 +68,8 @@ def home():
 @views.route("/donate",methods = ["POST", "GET"])
 def donate():
     global foods
+    if len(foods) == 0:
+        foods = pull_donations()
     #recieve data from front end
     if request.method == "POST": 
         #gets image
@@ -65,12 +97,13 @@ def donate():
         allergies = pars_data.get("allergies")
         id = pars_data.get("id")
 
-        donatedfood = [bname, bemail, blocation, image_name, d_content, d_weight, allergies, id]
+        donatedfood = [bname, bemail, blocation, d_content, d_weight, image_name, allergies, id]
         foods.append(donatedfood)
         content = str(d_content)
         weight = str(d_weight)
         content_id = int(id)
         insert_donation(bname, bemail, blocation, image_name, content, weight, allergies, content_id)
+        print (donatedfood)
     return render_template("donate.html")
 
 @views.route("/receive", methods = ["POST","GET"])

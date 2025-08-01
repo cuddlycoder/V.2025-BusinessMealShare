@@ -21,21 +21,15 @@
             <!--Loop through  every donated meal and display it-->
             {% for meal in meals %}
             <div class = "meal" onclick="highlight_meal(this)"> 
-                <img class="datar" src = "../static/images/{{meal[3]}}" alt = "Image" id = "mealimage">
+                <img class="datar" src = "../static/images/{{meal[5]}}" alt = "Image" id = "mealimage">
                 <h3 class="datar"> {{  meal[0] }}</h3>
                 <h4 class="datar">{{  meal[1] }}</h4>
                 <h5 class="datar">{{  meal[2] }}</h5>
-                {% for foodname, foodweight in zip(meal[4],meal[5]) %}
+                {% for foodname, foodweight in zip(meal[3],meal[4]) %}
                     <h5 class="datar">{{foodname}} - {{foodweight}}lbs (pounds) </h5>
                 {% endfor %}
                 <h6 class="datar">Allergies - {{ meal[6] }}</h6>
                 <span hidden>{{meal[7]}}</span>
-                <div id="deliveryemail" data-var="{{ meal[1] }}"></div>
-                <div id="food" data-var="{{ meal[4] }}"></div>
-                <div id="lbs" data-var="{{ meal[5] }}"></div>
-
-
-
             </div>
             {% endfor %}
         </div>

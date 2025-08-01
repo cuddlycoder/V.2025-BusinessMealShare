@@ -7,7 +7,7 @@ import os
 app = Flask(__name__,template_folder = "templates", static_folder = "static")
 
 #blue prints = every single webpage you can acess 
-#/views = part of the ling that we put before  webpage link
+#/views = part of the ling that we put before  webpage linkclcle
 app.register_blueprint(views,url_prefix = "/views")
 
 
