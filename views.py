@@ -6,13 +6,13 @@ views = Blueprint(__name__, "views")
 foods = []
 
 #Insert donations in database
-def insert_donation(name, email, location, imagename, dcontent, dweight, allergies, contentid):
+def insert_donation(name, email, location, imagename, dcontent, dweight, allergies, contentid, received):
     connection = sqlite3.connect("BusinessMealShareDatabase.db")
     cursor = connection.cursor()
     cursor.execute('''
-        INSERT INTO Donator (BusinessName, BusinessEmail, BusinessLocation, ItemsName, ItemsWeight, ItemsImage, Allergies, ContentId)
-        VALUES (?,?,?,?,?,?,?,?)
-    ''', (name, email, location, dcontent, dweight, imagename, allergies, contentid))
+        INSERT INTO Donator (BusinessName, BusinessEmail, BusinessLocation, ItemsName, ItemsWeight, ItemsImage, Allergies, ContentId, Received)
+        VALUES (?,?,?,?,?,?,?,?,?)
+    ''', (name, email, location, dcontent, dweight, imagename, allergies, contentid, received))
 
     connection.commit()
     connection.close()
@@ -63,13 +63,21 @@ def insert_recievers(orgname, orgrep, email, location, contentid):
 #Renders each page
 @views.route("/")
 def home():
-    return render_template("index.html")
 
-@views.route("/donate",methods = ["POST", "GET"])
-def donate():
+    #######FIXXXXXXXXXXXXXHOME WORK if received field has value YES it should not show up  on receive page
+    # pull donations from data base and show
     global foods
     if len(foods) == 0:
         foods = pull_donations()
+        for donation in foods:
+            if donation[-1] == "YES":
+                foods.remove(donation)
+    return render_template("index.html")
+    
+@views.route("/donate",methods = ["POST", "GET"])
+def donate():
+    global foods
+    
     #recieve data from front end
     if request.method == "POST": 
         #gets image
@@ -102,7 +110,7 @@ def donate():
         content = str(d_content)
         weight = str(d_weight)
         content_id = int(id)
-        insert_donation(bname, bemail, blocation, image_name, content, weight, allergies, content_id)
+        insert_donation(bname, bemail, blocation, image_name, content, weight, allergies, content_id, received = "YES")
         print (donatedfood)
     return render_template("donate.html")
 
