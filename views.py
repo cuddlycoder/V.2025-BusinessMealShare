@@ -20,7 +20,7 @@ def insert_donation(name, email, location, imagename, dcontent, dweight, allergi
 def pull_donations():
     connection = sqlite3.connect("BusinessMealShareDatabase.db")
     cursor = connection.cursor()
-    cursor.execute('''SELECT BusinessName, BusinessEmail, BusinessLocation, ItemsName, ItemsWeight, ItemsImage, Allergies FROM Donator''')
+    cursor.execute('''SELECT BusinessName, BusinessEmail, BusinessLocation, ItemsName, ItemsWeight, ItemsImage, Allergies, Received FROM Donator WHERE Received = 'NO' ''')
     donations = cursor.fetchall() 
     
     connection.close()
@@ -57,21 +57,26 @@ def insert_recievers(orgname, orgrep, email, location, contentid):
     connection.commit()
     connection.close()
 
+def modify_donator(ContentId, value):
+    connection = sqlite3.connect("BusinessMealShareDatabase.db")
+    cursor = connection.cursor()
+    cursor.execute('''
+                    UPDATE Donator SET Received = ? WHERE ContentId = ?
+                   ''',(value, ContentId))
+
+    connection.commit()
+    connection.close()
+
 
 
 
 #Renders each page
 @views.route("/")
 def home():
-
-    #######FIXXXXXXXXXXXXXHOME WORK if received field has value YES it should not show up  on receive page
     # pull donations from data base and show
     global foods
-    if len(foods) == 0:
+    if len(foods) == 0: # TO DO ; PULL DATA THAT DOESNT EXIST IN LIST ALREADY
         foods = pull_donations()
-        for donation in foods:
-            if donation[-1] == "YES":
-                foods.remove(donation)
     return render_template("index.html")
     
 @views.route("/donate",methods = ["POST", "GET"])
@@ -110,7 +115,7 @@ def donate():
         content = str(d_content)
         weight = str(d_weight)
         content_id = int(id)
-        insert_donation(bname, bemail, blocation, image_name, content, weight, allergies, content_id, received = "YES")
+        insert_donation(bname, bemail, blocation, image_name, content, weight, allergies, content_id, received = "NO")
         print (donatedfood)
     return render_template("donate.html")
 
@@ -128,6 +133,7 @@ def receive():
         orgemail = data["org-email"]
         orgaddress = data["org-address"] + data["city"] + data["state"] + data["zipcode"]
         insert_recievers(orgname, orgrep, orgemail, orgaddress, id)
+        #modify_donator(str(id),"YES")
 
         #Looking to see if id of donation matches id that we have got then removing that whole donation from the foods list because user already received it.
         for donation in foods:
