@@ -20,7 +20,7 @@ def insert_donation(name, email, location, imagename, dcontent, dweight, allergi
 def pull_donations():
     connection = sqlite3.connect("BusinessMealShareDatabase.db")
     cursor = connection.cursor()
-    cursor.execute('''SELECT BusinessName, BusinessEmail, BusinessLocation, ItemsName, ItemsWeight, ItemsImage, Allergies, Received FROM Donator WHERE Received = 'NO' ''')
+    cursor.execute('''SELECT BusinessName, BusinessEmail, BusinessLocation, ItemsName, ItemsWeight, ItemsImage, Allergies, ContentId, Received FROM Donator WHERE Received = 'NO' ''')
     donations = cursor.fetchall() 
     
     connection.close()
@@ -77,6 +77,7 @@ def home():
     global foods
     if len(foods) == 0: # TO DO ; PULL DATA THAT DOESNT EXIST IN LIST ALREADY
         foods = pull_donations()
+    print(foods)
     return render_template("index.html")
     
 @views.route("/donate",methods = ["POST", "GET"])
@@ -133,7 +134,7 @@ def receive():
         orgemail = data["org-email"]
         orgaddress = data["org-address"] + data["city"] + data["state"] + data["zipcode"]
         insert_recievers(orgname, orgrep, orgemail, orgaddress, id)
-        #modify_donator(str(id),"YES")
+        modify_donator(str(id),"YES")
 
         #Looking to see if id of donation matches id that we have got then removing that whole donation from the foods list because user already received it.
         for donation in foods:
@@ -141,6 +142,10 @@ def receive():
                 print("DELETED")
                 foods.remove(donation)
     return render_template("receive.html",meals = foods,zip = zip)
+
+@views.route("/teachablemachine", methods = ["POST","GET"])
+def teachablemachine():
+    return render_template("teachablemachine.html")
 
 @views.route("/login")
 def login():
