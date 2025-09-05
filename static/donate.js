@@ -1,5 +1,52 @@
 const local = true;
 
+// Add scripts to head
+const tfScript = document.createElement('script');
+tfScript.src = 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js';
+document.head.appendChild(tfScript);
+
+const tmScript = document.createElement('script');
+tmScript.src = 'https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js';
+document.head.appendChild(tmScript);
+
+// Wait a bit for scripts to load (not ideal, but simple)
+setTimeout(() => {
+    let model;
+    const URL = "https://teachablemachine.withgoogle.com/models/V8FHtn2Rp/";
+    // Load model
+    async function loadModel() {
+        model = await tmImage.load(URL + "model.json", URL + "metadata.json");
+    }
+
+    // Load model when page starts
+    loadModel();
+    console.log("Test")
+}, 2000);
+
+async function analyzeimage(file){
+    if (!file) return;
+            
+    // Show image
+    const img = document.getElementById('previewImage');
+    img.src = window.URL.createObjectURL(file);
+    img.style.display = 'block';
+    
+    // Wait for image to load, then predict
+    img.onload = async function() {
+        const predictions = await model.predict(img);
+        
+        // Find highest prediction
+        let topPrediction = predictions[0];
+        for (let i = 1; i < predictions.length; i++) {
+            if (predictions[i].probability > topPrediction.probability) {
+                topPrediction = predictions[i];
+            }
+        }
+        console.log(topPrediction.className)
+        };
+}
+
+
 // Create object to send requests
 let xhr = null;
 
@@ -41,6 +88,8 @@ function SendDonateData(e) {
 
     let dimageinput = document.getElementById("donation-image");
     console.log(dimageinput);
+
+    analyzeimage(dimageinput)
     
     // Get image from input field
     let file = dimageinput.files[0];
