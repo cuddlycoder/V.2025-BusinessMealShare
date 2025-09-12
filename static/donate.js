@@ -9,14 +9,15 @@ const tmScript = document.createElement('script');
 tmScript.src = 'https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js';
 document.head.appendChild(tmScript);
 
+let model;
+const URL = "https://teachablemachine.withgoogle.com/models/V8FHtn2Rp/";
+// Load model
+async function loadModel() {
+    model = await tmImage.load(URL + "model.json", URL + "metadata.json");
+}
 // Wait a bit for scripts to load (not ideal, but simple)
 setTimeout(() => {
-    let model;
-    const URL = "https://teachablemachine.withgoogle.com/models/V8FHtn2Rp/";
-    // Load model
-    async function loadModel() {
-        model = await tmImage.load(URL + "model.json", URL + "metadata.json");
-    }
+    
 
     // Load model when page starts
     loadModel();
@@ -25,25 +26,26 @@ setTimeout(() => {
 
 async function analyzeimage(file){
     if (!file) return;
+    return new Promise((resolve) => {
+        const img = new Image(); 
+        img.src = window.URL.createObjectURL(file)
+        // Wait for image to load, then predict
+        img.onload = async function() {
+            const predictions = await model.predict(img);
             
-    // Show image
-    const img = document.getElementById('previewImage');
-    img.src = window.URL.createObjectURL(file);
-    img.style.display = 'block';
-    
-    // Wait for image to load, then predict
-    img.onload = async function() {
-        const predictions = await model.predict(img);
-        
-        // Find highest prediction
-        let topPrediction = predictions[0];
-        for (let i = 1; i < predictions.length; i++) {
-            if (predictions[i].probability > topPrediction.probability) {
-                topPrediction = predictions[i];
+            // Find highest prediction
+            let topPrediction = predictions[0];
+            for (let i = 1; i < predictions.length; i++) {
+                if (predictions[i].probability > topPrediction.probability) {
+                    topPrediction = predictions[i];
+                }
             }
-        }
-        console.log(topPrediction.className)
+            console.log(topPrediction.className)
+            resolve(topPrediction.className)
         };
+    })
+    
+    
 }
 
 
@@ -58,10 +60,12 @@ function getXmlHttpRequestObject() {
     return xhr;
 }
 
-function SendDonateData(e) {
+async function SendDonateData(e) {
     e.preventDefault();
     let foodname = [];
     let foodweight = [];
+    let confirm_message = document.getElementById("confirmation");
+    let confirmation_done = document.getElementById("confirmation_done");
     
     // Get input values from input field
     let bfullname = document.getElementById("b-full-name").value;
@@ -89,7 +93,16 @@ function SendDonateData(e) {
     let dimageinput = document.getElementById("donation-image");
     console.log(dimageinput);
 
-    analyzeimage(dimageinput)
+    let fileimage = dimageinput.files[0]
+    let foodclass = await analyzeimage(fileimage)
+    console.log(foodclass)
+    if (foodclass != "Food"){
+        confirm_message.innerHTML = "Please add a fresh food image. We do not accept stale food";
+        confirm_message.style.color = "red";
+        return
+    }
+
+
     
     // Get image from input field
     let file = dimageinput.files[0];
@@ -101,8 +114,7 @@ function SendDonateData(e) {
     let id = Math.floor(Math.random()* 1000000)
     console.log(id)
 
-    let confirm_message = document.getElementById("confirmation");
-    let confirmation_done = document.getElementById("confirmation_done");
+    
 
     if (!file) {
         confirm_message.innerHTML = "Please select a meal image!";
