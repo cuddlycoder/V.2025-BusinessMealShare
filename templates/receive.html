@@ -16,6 +16,11 @@
         <h3>Donation Options</h3>
         <h4 class="label">Choose what donation you will accept</h4>
         <br>
+        <!--Save chosen contents email, chosen food, and lbs-->
+        <div id="deliveryemail"></div>
+        <div id="lbs"></div>
+        <div id="food"></div>
+
         <div id="meal-container">
     
             <!--Loop through  every donated meal and display it-->
@@ -139,6 +144,7 @@
         }
     }
     async function Send(){
+        console.log("Test 0")
         let receiveremail = document.getElementById("org-email").value
         let orgname = document.getElementById("org-name").value
         let orgrep = document.getElementById("rep-org-name").value
@@ -146,13 +152,15 @@
         let address2 = document.getElementById("city").value
         let address3 = document.getElementById("state").value
         let address4 = document.getElementById("zipcode").value
-        let deliveryemail = document.getElementById("deliveryemail").dataset.var
-        let food = document.getElementById("food").dataset.var
-        let foodlbs = document.getElementById("lbs").dataset.var
+        //let deliveryemail = document.getElementById("deliveryemail").dataset.var
+        //let food = document.getElementById("food").dataset.var
+        //let foodlbs = document.getElementById("lbs").dataset.var
+        console.log("Testt 1")
         const receiveemail = await SendEmail(receiveremail, "Delivery Confirmation", "Thank you for choosing MealShare! The donation that you chose will be delivered to you soon!")
         console.log(receiveemail)
         const deliveremail = await SendEmail(deliveryemail, "Donation Accepted", "Thank you for choosing MealShare! Your donation of "+ food+foodlbs +" has been accepted by "+ orgname +". You need to deliver it to "+ address1+ " "+address2+" "+address3+" "+address4 +". Please contact "+ orgrep +" at "+ receiveremail +" for more information!")
         console.log(deliveremail)
+        console.log("Testt 2")
     }
 document.getElementById("send").addEventListener("click", Send)
     </script>

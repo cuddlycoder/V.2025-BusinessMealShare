@@ -1,28 +1,26 @@
 const local = true;
 
-// Add scripts to head
+let model;
+const URL = "https://teachablemachine.withgoogle.com/models/3FMNZzkKa/";
+
+// Load TensorFlow.js first
 const tfScript = document.createElement('script');
 tfScript.src = 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js';
 document.head.appendChild(tfScript);
 
-const tmScript = document.createElement('script');
-tmScript.src = 'https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js';
-document.head.appendChild(tmScript);
+// Once tf is loaded, load Teachable Machine
+tfScript.onload = () => {
+    const tmScript = document.createElement('script');
+    tmScript.src = 'https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js';
+    document.head.appendChild(tmScript);
 
-let model;
-const URL = "https://teachablemachine.withgoogle.com/models/V8FHtn2Rp/";
-// Load model
-async function loadModel() {
-    model = await tmImage.load(URL + "model.json", URL + "metadata.json");
-}
-// Wait a bit for scripts to load (not ideal, but simple)
-setTimeout(() => {
-    
+    // Once Teachable Machine is loaded, load the model
+    tmScript.onload = async () => {
+        model = await tmImage.load(URL + "model.json", URL + "metadata.json");
+        console.log("Model loaded and ready!");
+    };
+};
 
-    // Load model when page starts
-    loadModel();
-    console.log("Test")
-}, 2000);
 
 async function analyzeimage(file){
     if (!file) return;
@@ -96,7 +94,7 @@ async function SendDonateData(e) {
     let fileimage = dimageinput.files[0]
     let foodclass = await analyzeimage(fileimage)
     console.log(foodclass)
-    if (foodclass != "Food"){
+    if (foodclass != "Good Food"){
         confirm_message.innerHTML = "Please add a fresh food image. We do not accept stale food";
         confirm_message.style.color = "red";
         return
