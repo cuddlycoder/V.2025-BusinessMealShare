@@ -28,13 +28,15 @@
             <div class = "meal" onclick="highlight_meal(this)"> 
                 <img class="datar" src = "../static/images/{{meal[5]}}" alt = "Image" id = "mealimage">
                 <h3 class="datar"> {{  meal[0] }}</h3>
-                <h4 class="datar">{{  meal[1] }}</h4>
+                <h4 class="datar" id="donatoremail">{{  meal[1] }}</h4>
                 <h5 class="datar">{{  meal[2] }}</h5>
                 {% for foodname, foodweight in zip(meal[3],meal[4]) %}
                     <h5 class="datar">{{foodname}} - {{foodweight}}lbs (pounds) </h5>
                 {% endfor %}
                 <h6 class="datar">Allergies - {{ meal[6] }}</h6>
                 <span hidden>{{meal[7]}}</span>
+                <div hidden id="allfoodname">{{meal[3]}}</div>
+                <div hidden id="allfoodweight">{{meal[4]}}</div>
             </div>
             {% endfor %}
         </div>
@@ -152,13 +154,17 @@
         let address2 = document.getElementById("city").value
         let address3 = document.getElementById("state").value
         let address4 = document.getElementById("zipcode").value
-        //let deliveryemail = document.getElementById("deliveryemail").dataset.var
-        //let food = document.getElementById("food").dataset.var
-        //let foodlbs = document.getElementById("lbs").dataset.var
+        let deliveryemail = document.getElementById("deliveryemail").value
+        
+        //let food = document.getElementById("food").value
+        //let foodlbs = document.getElementById("lbs").value
+        let food = "apple"
+        let foodlbs = "50"
+
         console.log("Testt 1")
         const receiveemail = await SendEmail(receiveremail, "Delivery Confirmation", "Thank you for choosing MealShare! The donation that you chose will be delivered to you soon!")
         console.log(receiveemail)
-        const deliveremail = await SendEmail(deliveryemail, "Donation Accepted", "Thank you for choosing MealShare! Your donation of "+ food+foodlbs +" has been accepted by "+ orgname +". You need to deliver it to "+ address1+ " "+address2+" "+address3+" "+address4 +". Please contact "+ orgrep +" at "+ receiveremail +" for more information!")
+        const deliveremail = await SendEmail(deliveryemail, "Donation Accepted", "Thank you for choosing MealShare! Your donation of "+ food + " " + foodlbs +" has been accepted by "+ orgname +". You need to deliver it to "+ address1+ " "+address2+" "+address3+" "+address4 +". Please contact "+ orgrep +" at "+ receiveremail +" for more information!")
         console.log(deliveremail)
         console.log("Testt 2")
     }

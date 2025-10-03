@@ -13,6 +13,18 @@ function highlight_meal(selectedmeal){
     let contentname = selectedmeal.querySelector("span")
     chosen_content = contentname.textContent
     console.log(chosen_content)
+    //we are getting the value of delivery email (where we want to send the email) and donatoremail (from the user's selected donation) and making them equal to eachother
+    donatoremail = document.getElementById("donatoremail").value
+    deliveryemail = document.getElementById("deliveryemail").value
+    deliveryemail = donatoremail
+
+    deliveryfoodname = document.getElementById("allfoodname").value
+    deliveryfoodweight = document.getElementById("allfoodweight").value
+    food = document.getElementById("food").value
+    lbs = document.getElementById("lbs").value
+    food = deliveryfoodname
+    lbs = deliveryfoodweight
+    
 }
 
 
