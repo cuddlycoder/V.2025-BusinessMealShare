@@ -1,4 +1,4 @@
-const local = true
+const local = false
 
 let chosen_content = null
 function highlight_meal(selectedmeal){
@@ -110,7 +110,7 @@ document.getElementById("back-recieve").addEventListener("click",function(event)
        window.location.href = "http://127.0.0.1:8000/views/" 
     }
     else{
-        window.location.href = "https://businessmealshare.onrender.com/views/"
+        window.location.href = "https://v-2025-businessmealshare.onrender.com/views/"
     }
 })
 

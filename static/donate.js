@@ -1,4 +1,4 @@
-const local = true;
+const local = false;
 
 let model;
 const URL = "https://teachablemachine.withgoogle.com/models/3FMNZzkKa/";
@@ -203,7 +203,7 @@ document.getElementById("back-donate").addEventListener("click", function (event
     if (local) {
         window.location.href = "http://127.0.0.1:8000/views/";
     } else {
-        window.location.href = "https://businessmealshare.onrender.com/views/";
+        window.location.href = "https://v-2025-businessmealshare.onrender.com/views/";
     }
 });
 
