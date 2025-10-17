@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-.main_section{
+
+.main_section {
     width: 100%;
-    padding:20px;
-    
+    padding: 20px;
 }
 
-body,*{
-    background-color: #ddffdc;
+body, * {
+    background-color: #e6f5ea;
 }
 
-#menu{
+#menu {
     width: 100%;
     height: 10%;
-    background-color:#91ff8d;
+    background-color: #1b4332;
     position: fixed;
     top: 0;
     left: 0;
@@ -23,29 +23,33 @@ body,*{
     justify-content: space-around;
 }
 
-#menu h4{
-    background-color:#91ff8d ;
+#menu h4 {
+    background-color: #1b4332;
     margin: 1.5%;
+    color: #ffffff;
 }
 
-#menu a{
-    background-color:#91ff8d ;
-    color: black;
+#menu a {
+    background-color: #1b4332;
+    color: #ffffff;
     margin: 1.5%;
     text-decoration: none;
     font-size: 1.5em;
 }
-#menu a:hover{
+
+#menu a:hover {
     text-decoration: underline;
 }
-#infodropdown{
+
+#infodropdown {
     display: none;
 }
-#info:hover #infodropdown{
+
+#info:hover #infodropdown {
     display: block;
 }
 
-#logo{
+#logo {
     width: 400px;
     height: 400px;
     margin-top: 20%;
@@ -55,21 +59,19 @@ body,*{
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    
 }
-
 
 .info {
     width: 400px;
-    max-width: 45%; 
-    border: 2px solid #264621; 
-    border-radius: 8px; 
-    padding: 15px; 
-    text-align: center; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #06402b;
+    max-width: 45%;
+    border: 2px solid #2d6a4f;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: #d8f3dc;
     box-sizing: border-box;
-    border-color: #ffffff;
+    color: #1b1b1b;
 }
 
 .Statistic {
@@ -79,175 +81,175 @@ body,*{
     margin-bottom: 10px;
 }
 
-#img1{
-    background-color: #06402b;
+#img1 {
+    background-color: #d8f3dc;
 }
 
 p {
-    color: #333;
+    color: #1b1b1b;
     font-family: "Beiruti";
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-    
 }
 
-.statp{
-    background-color: #06402b;
-    color: white;
-    font-weight: 800px;
+.statp {
+    background-color: #d8f3dc;
+    color: #1b1b1b;
+    font-weight: 800;
 }
 
-.content{
-    width: 50%;     
+.content {
+    width: 50%;
     text-align: center;
     margin: 0 auto;
 }
 
-.contentr{
-    width: 75%;     
+.contentr {
+    width: 75%;
     text-align: center;
     margin: 0 auto;
 }
 
-h1{
+h1 {
     word-spacing: 10px;
     font-family: "Bona Nova SC";
     font-style: normal;
+    color: #1b4332;
 }
 
-#donate{
-    font-size: 10%; 
+#donate {
+    font-size: 10%;
 }
 
-
-label,.label{
+label, .label {
     font-family: "Beiruti";
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
+    color: #1b1b1b;
 }
 
-
-
-
-h2{
-    color: #526E48;
+h2 {
+    color: #2d6a4f;
     font-family: "Bona Nova SC";
     font-style: normal;
     font-weight: 400;
 }
 
-h3{
-  font-family: "Arsenal SC", serif;
-  font-weight: 400;
-  font-style: normal;
-  color: #526E48;
+h3 {
+    font-family: "Arsenal SC", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #2d6a4f;
 }
 
-
-.Dbtn{
-    background-color: rgb(75, 164, 89);
-    color: white;
-    border-color: white;
+.Dbtn {
+    background-color: #2d6a4f;
+    color: #ffffff;
+    border-color: #40916c;
     width: 150px;
     height: 45px;
     margin: 2% 6%;
     border-radius: 20px;
     font-size: 15px;
-    
 }
 
-.Sbtn{
-    background-color: rgb(75, 164, 89);
-    color: white;
-    border-color: white;
+.Sbtn {
+    background-color: #2d6a4f;
+    color: #ffffff;
+    border-color: #40916c;
     width: 200px;
     height: 45px;
     margin: 4% 6%;
     font-size: 15px;
-
-
 }
 
-.send_back{
+.send_back {
     margin: 3%;
 }
 
-.button{
+.button {
     width: 150px;
     height: 50px;
     margin: 5%;
+    background-color: #2d6a4f;
+    color: #ffffff;
+    border: none;
 }
 
-#meal-container { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 20px; 
-    justify-content: center; 
-    padding: 20px; 
-    background-color: #ddffdc;} 
-    
-.meal { 
-    border: 3px solid #ffffff; 
-    border-radius: 8px; 
-    padding: 15px; 
+#meal-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    background-color: #e6f5ea;
+}
+
+.meal {
+    border: 3px solid #40916c;
+    border-radius: 8px;
+    padding: 15px;
     width: 400px;
-    text-align: center; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    background-color: #2E632C;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #d8f3dc;
+    color: #1b1b1b;
 }
 
-
-.datar{
-    background-color:#2E632C;
+.datar {
+    background-color: #d8f3dc;
     font-family: "Arsenal SC", serif;
     font-weight: 400;
     font-style: normal;
-    color: #ffffff;
+    color: #1b1b1b;
 }
 
 .meal:hover {
     cursor: pointer;
 }
+
 .highlight {
-    background-color: #a6f4ab;
-    border-color: rgb(22, 180, 22) ;
-    box-shadow: 0 0 10px rgb(8, 72, 8);
+    background-color: #b7e4c7;
+    border-color: #40916c;
+    box-shadow: 0 0 10px #74c69d;
 }
 
-#mealimage{
+#mealimage {
     width: 200px;
 }
 
-#confirmation{
+#confirmation {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 22px;
+    color: #1b4332;
 }
 
-#confirmation_done{
+#confirmation_done {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 22px;
+    color: #1b4332;
 }
 
-.list-item{
-    display:flex;
-
+.list-item {
+    display: flex;
 }
 
-#weight{
+#weight {
     width: 20%;
     text-align: center;
 }
-#item{
+
+#item {
     text-align: center;
 }
 
-#send,#back-donate{
+#send, #back-donate {
     font-family: "Beiruti";
     font-style: normal;
     font-size: 19px;
+    color: #1b1b1b;
 }
-
