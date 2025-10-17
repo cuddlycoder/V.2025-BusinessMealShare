@@ -24,7 +24,8 @@ function highlight_meal(selectedmeal){
     lbs = document.getElementById("lbs").value
     food = deliveryfoodname
     lbs = deliveryfoodweight
-    
+    console.log(deliveryfoodname)
+    console.log(deliveryfoodweight)
 }
 
 

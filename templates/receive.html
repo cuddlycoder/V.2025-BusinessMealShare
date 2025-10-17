@@ -26,6 +26,7 @@
             <!--Loop through  every donated meal and display it-->
             {% for meal in meals %}
             <div class = "meal" onclick="highlight_meal(this)"> 
+                
                 <img class="datar" src = "../static/images/{{meal[5]}}" alt = "Image" id = "mealimage">
                 <h3 class="datar"> {{  meal[0] }}</h3>
                 <h4 class="datar" id="donatoremail">{{  meal[1] }}</h4>
@@ -35,8 +36,8 @@
                 {% endfor %}
                 <h6 class="datar">Allergies - {{ meal[6] }}</h6>
                 <span hidden>{{meal[7]}}</span>
-                <div hidden id="allfoodname">{{meal[3]}}</div>
-                <div hidden id="allfoodweight">{{meal[4]}}</div>
+                <h5 hidden id="allfoodname">{{meal[3]}}</h5>
+                <h5 hidden id="allfoodweight">{{meal[4]}}</h5>
             </div>
             {% endfor %}
         </div>
@@ -105,7 +106,7 @@
              </div>
              
              <footer>
-                &copy; 2024 @mealshare
+                &copy; 2025 @MealShare
              </footer>
             
         </form>
@@ -158,15 +159,15 @@
         
         //let food = document.getElementById("food").value
         //let foodlbs = document.getElementById("lbs").value
-        let food = "apple"
-        let foodlbs = "50"
+        let food = "banana - 50lbs , apple - "
+        let foodlbs = "80lbs"
 
-        console.log("Testt 1")
+        
         const receiveemail = await SendEmail(receiveremail, "Delivery Confirmation", "Thank you for choosing MealShare! The donation that you chose will be delivered to you soon!")
         console.log(receiveemail)
-        const deliveremail = await SendEmail(deliveryemail, "Donation Accepted", "Thank you for choosing MealShare! Your donation of "+ food + " " + foodlbs +" has been accepted by "+ orgname +". You need to deliver it to "+ address1+ " "+address2+" "+address3+" "+address4 +". Please contact "+ orgrep +" at "+ receiveremail +" for more information!")
+        const deliveremail = await SendEmail(deliveryemail, "Donation Accepted", "Thank you for choosing MealShare! Your donation of "+ food + " " + foodlbs +" has been accepted by "+ orgname +". You need to deliver it to "+ address1+ " "+address2+" "+address3+" "+address4 +". Please contact the representatice of" + orgname + " with any queries and queries about the donation: " + orgrep +" at "+ receiveremail)
         console.log(deliveremail)
-        console.log("Testt 2")
+        
     }
 document.getElementById("send").addEventListener("click", Send)
     </script>
