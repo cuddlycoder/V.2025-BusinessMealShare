@@ -144,7 +144,7 @@ async function SendDonateData(e) {
     if (local) {
         xhr.open("POST", "http://127.0.0.1:8000/views/donate", true);
     } else {
-        xhr.open("POST", "https://businessmealshare.onrender.com/views/donate", true);
+        xhr.open("POST", "https://v-2025-businessmealshare.onrender.com/views/donate", true);
     }
 
     xhr.onload = function () {
