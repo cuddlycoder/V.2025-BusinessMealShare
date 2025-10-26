@@ -165,7 +165,7 @@
         
         const receiveemail = await SendEmail(receiveremail, "Delivery Confirmation", "Thank you for choosing MealShare! The donation that you chose will be delivered to you soon!")
         console.log(receiveemail)
-        const deliveremail = await SendEmail(deliveryemail, "Donation Accepted", "Thank you for choosing MealShare! Your donation of "+ food + " " + foodlbs +" has been accepted by "+ orgname +". You need to deliver it to "+ address1+ " "+address2+" "+address3+" "+address4 +". Please contact the representatice of" + orgname + " with any queries and queries about the donation: " + orgrep +" at "+ receiveremail)
+        const deliveremail = await SendEmail(deliveryemail, "Donation Accepted", "Thank you for choosing MealShare! Your donation of "+ food + " " + foodlbs +" has been accepted by "+ orgname +". You need to deliver it to "+ address1+ " "+address2+" "+address3+" "+address4 +". Please contact the representatice of" + orgname + " with any queries about the donation: " + orgrep +" at "+ receiveremail)
         console.log(deliveremail)
         
     }
